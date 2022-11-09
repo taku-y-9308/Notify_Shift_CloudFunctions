@@ -26,7 +26,7 @@ logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)
 
 try:
-    conn = pymysql.connect(host=host,user=username,password=password,database=dbname,cursorclass=pymysql.cursors.DictCursor,unix_socket=True)
+    conn = pymysql.connect(host=host,user=username,password=password,database=dbname,unix_socket=True)
 
 except Exception as e:
     logging.error('ERROR: Unexpected error: Could not connect to MySQL instance.')
