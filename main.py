@@ -16,17 +16,18 @@ LINE_CHANNEL_SECRET         = os.environ['LINE_CHANNEL_SECRET']
 LINE_BOT_API = LineBotApi(LINE_CHANNEL_ACCESS_TOKEN)
 LINE_HANDLER = WebhookHandler(LINE_CHANNEL_SECRET)
 
-host = os.environ['UNIX_SOCKET']
+host = os.environ['HOST'] 
 username = os.environ['USERNAME']
 password = os.environ['PASSWORD']
 dbname = os.environ['DB_NAME']
 port = os.environ['PORT']
+unix_socket = os.environ['UNIX_SOCKET']
 
 logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)
 
 try:
-    conn = pymysql.connect(host=host,user=username,password=password,database=dbname,unix_socket=True)
+    conn = pymysql.connect(host=host,user=username,password=password,database=dbname,unix_socket=unix_socket)
 
 except Exception as e:
     logging.error('ERROR: Unexpected error: Could not connect to MySQL instance.')
