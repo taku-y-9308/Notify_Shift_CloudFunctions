@@ -16,7 +16,7 @@ LINE_CHANNEL_SECRET         = os.environ['LINE_CHANNEL_SECRET']
 LINE_BOT_API = LineBotApi(LINE_CHANNEL_ACCESS_TOKEN)
 LINE_HANDLER = WebhookHandler(LINE_CHANNEL_SECRET)
 
-host = os.environ['HOST']
+host = os.environ['UNIX_SOCKET']
 username = os.environ['USERNAME']
 password = os.environ['PASSWORD']
 dbname = os.environ['DB_NAME']
@@ -26,16 +26,16 @@ logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)
 
 try:
-    conn = pymysql.connect(host=host,user=username,password=password,database=dbname,cursorclass=pymysql.cursors.DictCursor)
+    conn = pymysql.connect(host=host,user=username,password=password,database=dbname,cursorclass=pymysql.cursors.DictCursor,unix_socket=True)
 
-except Exceptions as e:
+except Exception as e:
     logging.error('ERROR: Unexpected error: Could not connect to MySQL instance.')
     logging.error(e)
     sys.exit()
 
 logger.info("SUCCESS: Connection to heroku MySQL succeeded")
 def handler(request):
-    logger.info(event)
+    logger.info(request)
     """
     body_str = event["body"]
     body_dict = json.loads(body_str)
