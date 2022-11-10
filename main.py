@@ -1,7 +1,7 @@
 import functions_framework
 from email import message
 import sys,os,logging,json
-import pymysql.cursors
+import psycopg2
 from datetime import datetime, date, timedelta,timezone
 from linebot import (
     LineBotApi, WebhookHandler
@@ -20,14 +20,12 @@ host = os.environ['HOST']
 username = os.environ['USERNAME']
 password = os.environ['PASSWORD']
 dbname = os.environ['DB_NAME']
-port = os.environ['PORT']
-unix_socket = os.environ['UNIX_SOCKET']
 
 logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)
 
 try:
-    conn = pymysql.connect(user=username,password=password,database=dbname,unix_socket=unix_socket)
+    conn = psycopg2.connect(host=host,dbname=dbname,user=username,password=password)
 
 except Exception as e:
     logging.error('ERROR: Unexpected error: Could not connect to MySQL instance.')
