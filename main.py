@@ -1,3 +1,4 @@
+import functions_framework
 from email import message
 import sys,os,logging,psycopg2,json
 from datetime import datetime, date, timedelta,timezone
