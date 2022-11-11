@@ -31,8 +31,8 @@ except psycopg2.OperationalError as e:
     sys.exit()
 
 logger.info("SUCCESS: Connection to heroku PostgreSQL succeeded")
-def handler(event, context):
-    logger.info(event)
+def handler(request):
+    logger.info(request)
     """
     body_str = event["body"]
     body_dict = json.loads(body_str)
