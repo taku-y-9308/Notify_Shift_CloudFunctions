@@ -77,11 +77,11 @@ def handler(request):
         #logger.info(type(tomorrow_shift_lists[0]['date'])) #<class 'datetime.date'>
         #logger.info(type(tomorrow_shift_lists[0]['start'])) #<class 'datetime.datetime'>
         
-        reply_message = ""
     conn.commit()
 
     @LINE_HANDLER.add(MessageEvent, message=TextMessage)
     def on_message(line_event):
+        reply_message = "testmessage"
         LINE_BOT_API.reply_message(line_event.reply_token, TextSendMessage(reply_message))
     
     for tomorrow_shift_list in tomorrow_shift_lists:
