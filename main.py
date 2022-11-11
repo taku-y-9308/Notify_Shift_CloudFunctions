@@ -77,11 +77,6 @@ def handler(request):
         #logger.info(type(tomorrow_shift_lists[0]['date'])) #<class 'datetime.date'>
         #logger.info(type(tomorrow_shift_lists[0]['start'])) #<class 'datetime.datetime'>
         
-        #LINE登録しているユーザーを取得
-        cur.execute('select * from line_bot;')
-        result_notify_list = cur.fetchall()
-        logger.info(result_notify_list)
-        
         reply_message = ""
     conn.commit()
 
