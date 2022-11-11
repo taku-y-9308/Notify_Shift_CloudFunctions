@@ -16,7 +16,7 @@ LINE_CHANNEL_SECRET         = os.environ['LINE_CHANNEL_SECRET']
 LINE_BOT_API = LineBotApi(LINE_CHANNEL_ACCESS_TOKEN)
 LINE_HANDLER = WebhookHandler(LINE_CHANNEL_SECRET)
 
-host = os.environ['HOST'] 
+unix_socket = os.environ['UNIX_SOCKET']
 username = os.environ['USERNAME']
 password = os.environ['PASSWORD']
 dbname = os.environ['DB_NAME']
@@ -25,7 +25,7 @@ logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)
 
 try:
-    conn = psycopg2.connect(host=host,dbname=dbname,user=username,password=password)
+    conn = psycopg2.connect(database=dbname,user=username,password=password,host=unix_socket)
 
 except Exception as e:
     logging.error('ERROR: Unexpected error: Could not connect to MySQL instance.')
@@ -58,7 +58,7 @@ def handler(request):
             on "ShiftManagementApp_shift".user_id = "ShiftManagementApp_user".id \
             inner join line_bot \
             on "ShiftManagementApp_user".id = line_bot.user_id '\
-            +f"where date ='{testdate}';")
+            +f"where date ='{tomorrow}';")
         results_shifts = cur.fetchall()
         logger.info(results_shifts)
         tomorrow_shift_lists = []
