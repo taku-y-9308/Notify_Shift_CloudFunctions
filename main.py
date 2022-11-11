@@ -31,6 +31,8 @@ except psycopg2.OperationalError as e:
     sys.exit()
 
 logger.info("SUCCESS: Connection to heroku PostgreSQL succeeded")
+
+@functions_framework.http
 def handler(request):
     logger.info(request)
     """
@@ -105,4 +107,4 @@ def handler(request):
     """
     LINE_HANDLER.handle(body, signature)
     """
-    return 0
+    return 'OK'
